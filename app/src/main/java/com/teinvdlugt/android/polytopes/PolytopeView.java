@@ -128,7 +128,7 @@ public class PolytopeView extends View {
 
     private void init() {
         paint = new Paint();
-        paint.setStrokeWidth(5);
+        paint.setStrokeWidth(2);
         paint.setAntiAlias(true);
         render();
     }

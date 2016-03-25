@@ -6,11 +6,23 @@
     android:orientation="vertical"
     tools:context="com.teinvdlugt.android.polytopes.MainActivity">
 
-    <com.teinvdlugt.android.polytopes.PolytopeView
-        android:id="@+id/polytopeView"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1">
+
+        <com.teinvdlugt.android.polytopes.PolytopeView
+            android:id="@+id/polytopeView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.teinvdlugt.android.polytopes.VerticalScroller
+            android:layout_margin="8dp"
+            android:id="@+id/verticalScroller"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end" />
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,24 +61,5 @@
             android:background="?selectableItemBackgroundBorderless"
             android:onClick="onClick5D"
             android:text="5" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/rotation_2d"
-            android:textColor="?android:textColorPrimary" />
-
-        <SeekBar
-            android:id="@+id/seekBar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:max="157" />
     </LinearLayout>
 </LinearLayout>
