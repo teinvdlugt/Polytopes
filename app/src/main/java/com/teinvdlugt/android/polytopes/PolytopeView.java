@@ -17,6 +17,7 @@ public class PolytopeView extends View {
     private double distanceInLowDimensions = 200;
     private double distancePerHigherDimension = 100;
     private double rotation2D = 0;
+    private int minX, maxX, minY, maxY;
     private Paint paint;
     List<Point> points = new ArrayList<>();
     List<Line> lines = new ArrayList<>();
@@ -24,10 +25,28 @@ public class PolytopeView extends View {
     private void render() {
         points.clear();
         lines.clear();
-        Point first = new Point(200, 1150);
+        Point first = new Point(0, 0);
         points.add(first);
         for (int n = 1; n < dimensions + 1; n++) {
             dimensionUp(n);
+        }
+
+        minX = maxX = points.get(0).x;
+        minY = maxY = points.get(0).y;
+        for (int i = 1; i < points.size(); i++) {
+            Point pt = points.get(i);
+            if (pt.x < minX) {
+                minX = pt.x;
+            }
+            if (pt.x > maxX) {
+                maxX = pt.x;
+            }
+            if (pt.y < minY) {
+                minY = pt.y;
+            }
+            if (pt.y > maxY) {
+                maxY = pt.y;
+            }
         }
     }
 
@@ -36,8 +55,11 @@ public class PolytopeView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        int xOffset = getWidth() / 2 - (maxX + minX) / 2;
+        int yOffset = getHeight() / 2 - (maxY + minY) / 2;
+
         for (Line line : lines) {
-            canvas.drawLine(line.p1.x, line.p1.y, line.p2.x, line.p2.y, paint);
+            canvas.drawLine(line.p1.x + xOffset, line.p1.y + yOffset, line.p2.x + xOffset, line.p2.y + yOffset, paint);
         }
     }
 
