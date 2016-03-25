@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Polytopes</string>
+    <string name="rotation_2d">2D:</string>
 </resources>

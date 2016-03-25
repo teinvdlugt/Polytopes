@@ -16,6 +16,7 @@ public class PolytopeView extends View {
     private double anglePerDimension = .5;
     private double distanceInLowDimensions = 200;
     private double distancePerHigherDimension = 100;
+    private double rotation2D = 0;
     private Paint paint;
     List<Point> points = new ArrayList<>();
     List<Line> lines = new ArrayList<>();
@@ -47,10 +48,10 @@ public class PolytopeView extends View {
             double angle;
             switch (dimension) {
                 case 1:
-                    angle = 0;
+                    angle = rotation2D;
                     break;
                 case 2:
-                    angle = Math.PI * .5;
+                    angle = rotation2D + Math.PI * .5;
                     break;
                 default:
                     angle = (dimension - 2) * anglePerDimension;
@@ -91,6 +92,16 @@ public class PolytopeView extends View {
             render();
             invalidate();
         }
+    }
+
+    public double getRotation2D() {
+        return rotation2D;
+    }
+
+    public void setRotation2D(double rotation2D) {
+        this.rotation2D = rotation2D;
+        render();
+        invalidate();
     }
 
     private void init() {
