@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Polytopes</string>
     <string name="rotation_2d">2D:</string>
+    <string name="stroke_width">Stroke width:</string>
 </resources>

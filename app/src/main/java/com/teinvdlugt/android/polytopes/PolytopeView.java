@@ -116,6 +116,15 @@ public class PolytopeView extends View {
         }
     }
 
+    public float getStrokeWidth() {
+        return paint.getStrokeWidth();
+    }
+
+    public void setStrokeWidth(float strokeWidth) {
+        paint.setStrokeWidth(strokeWidth);
+        invalidate();
+    }
+
     public double getRotation2D() {
         return rotation2D;
     }
@@ -128,7 +137,7 @@ public class PolytopeView extends View {
 
     private void init() {
         paint = new Paint();
-        paint.setStrokeWidth(2);
+        paint.setStrokeWidth(3);
         paint.setAntiAlias(true);
         render();
     }
