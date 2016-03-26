@@ -1,14 +1,20 @@
 package com.teinvdlugt.android.polytopes;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.graphics.drawable.AnimatedVectorDrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity {
 
     private PolytopeView polytopeView;
     private SeekBar strokeWidthSeekBar;
+    private BottomSheetBehavior bottomSheetBehavior;
+    private ImageButton expandButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         polytopeView = (PolytopeView) findViewById(R.id.polytopeView);
+        expandButton = (ImageButton) findViewById(R.id.expandImageButton);
         strokeWidthSeekBar = (SeekBar) findViewById(R.id.strokeWidthSeekBar);
         strokeWidthSeekBar.setProgress((int) polytopeView.getStrokeWidth() * 10);
         strokeWidthSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -38,6 +45,25 @@ public class MainActivity extends AppCompatActivity {
                     polytopeView.setRotation2D(progress);
                 }
             });
+
+        View bottomSheet = findViewById(R.id.bottomSheet);
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                switch (newState) {
+                    case BottomSheetBehavior.STATE_EXPANDED:
+                        expandButton.setImageResource(R.drawable.ic_expand_more_black_24dp);
+                        break;
+                    case BottomSheetBehavior.STATE_COLLAPSED:
+                        expandButton.setImageResource(R.drawable.ic_expand_less_black_24dp);
+                        break;
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {}
+        });
     }
 
     public void onClick2D(View view) {
@@ -54,5 +80,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick5D(View view) {
         polytopeView.setDimensions(5);
+    }
+
+    public void onClickExpand(View view) {
+        switch (bottomSheetBehavior.getState()) {
+            case BottomSheetBehavior.STATE_COLLAPSED:
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                break;
+            case BottomSheetBehavior.STATE_EXPANDED:
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                break;
+        }
     }
 }

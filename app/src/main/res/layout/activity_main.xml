@@ -25,6 +25,7 @@
     </FrameLayout>
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/bottomSheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/bottomSheetBackgroundColor"
@@ -78,6 +79,16 @@
                         android:background="?selectableItemBackgroundBorderless"
                         android:onClick="onClick5D"
                         android:text="5" />
+
+                    <ImageButton
+                        android:id="@+id/expandImageButton"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/a11y_expand"
+                        android:onClick="onClickExpand"
+                        app:srcCompat="@drawable/ic_expand_less_black_24dp" />
                 </LinearLayout>
             </android.support.v7.widget.Toolbar>
 
