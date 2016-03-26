@@ -7,7 +7,6 @@ import android.view.View;
 public class MainActivity extends AppCompatActivity {
 
     private PolytopeView polytopeView;
-    private VerticalScroller verticalScroller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,14 +14,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         polytopeView = (PolytopeView) findViewById(R.id.polytopeView);
-        verticalScroller = (VerticalScroller) findViewById(R.id.verticalScroller);
 
-        verticalScroller.setOnProgressChangeListener(new VerticalScroller.OnProgressChangeListener() {
-            @Override
-            public void onProgressChanged(double progress) {
-                polytopeView.setRotation2D(progress);
-            }
-        });
+        VerticalScroller verticalScroller = (VerticalScroller) findViewById(R.id.verticalScroller);
+        if (verticalScroller != null)
+            verticalScroller.setOnProgressChangeListener(new VerticalScroller.OnProgressChangeListener() {
+                @Override
+                public void onProgressChanged(double progress) {
+                    polytopeView.setRotation2D(progress);
+                }
+            });
     }
 
     public void onClick2D(View view) {

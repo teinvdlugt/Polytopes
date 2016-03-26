@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,8 +9,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent">
 
         <com.teinvdlugt.android.polytopes.PolytopeView
             android:id="@+id/polytopeView"
@@ -17,49 +17,73 @@
             android:layout_height="match_parent" />
 
         <com.teinvdlugt.android.polytopes.VerticalScroller
-            android:layout_margin="8dp"
             android:id="@+id/verticalScroller"
             android:layout_width="40dp"
             android:layout_height="match_parent"
-            android:layout_gravity="end" />
+            android:layout_gravity="end"
+            android:layout_margin="8dp" />
     </FrameLayout>
 
-    <LinearLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        tools:ignore="HardcodedText">
+        android:background="@color/bottomSheetBackgroundColor"
+        app:behavior_peekHeight="?actionBarSize"
+        app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
-        <Button
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?selectableItemBackgroundBorderless"
-            android:onClick="onClick2D"
-            android:text="2" />
+            android:orientation="vertical">
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?selectableItemBackgroundBorderless"
-            android:onClick="onClick3D"
-            android:text="3" />
+            <android.support.v7.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:elevation="4dp">
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?selectableItemBackgroundBorderless"
-            android:onClick="onClick4D"
-            android:text="4" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    tools:ignore="HardcodedText">
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?selectableItemBackgroundBorderless"
-            android:onClick="onClick5D"
-            android:text="5" />
-    </LinearLayout>
-</LinearLayout>
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:onClick="onClick2D"
+                        android:text="2" />
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:onClick="onClick3D"
+                        android:text="3" />
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:onClick="onClick4D"
+                        android:text="4" />
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:onClick="onClick5D"
+                        android:text="5" />
+                </LinearLayout>
+            </android.support.v7.widget.Toolbar>
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>
