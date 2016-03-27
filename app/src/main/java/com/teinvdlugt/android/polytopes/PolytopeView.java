@@ -194,6 +194,16 @@ public class PolytopeView extends View {
         invalidate();
     }
 
+    public double getDistancePerHigherDimension() {
+        return distancePerHigherDimension;
+    }
+
+    public void setDistancePerHigherDimension(double distancePerHigherDimension) {
+        this.distancePerHigherDimension = distancePerHigherDimension;
+        render();
+        invalidate();
+    }
+
     public double getRotation2D() {
         return rotation2D;
     }

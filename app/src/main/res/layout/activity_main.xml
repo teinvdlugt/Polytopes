@@ -133,6 +133,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:max="157" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/perspective_distance"
+                    android:textColor="?android:textColorPrimary" />
+
+                <SeekBar
+                    android:id="@+id/perspectiveDistanceSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
