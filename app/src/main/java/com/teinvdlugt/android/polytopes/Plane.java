@@ -11,4 +11,13 @@ public class Plane {
         this.points = new ArrayList<>();
         Collections.addAll(this.points, points);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Point pt : points)
+            sb.append(pt).append(", ");
+        sb.delete(sb.length() - 2, sb.length() - 1);
+        return sb.toString();
+    }
 }

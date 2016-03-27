@@ -7,4 +7,9 @@ public class Line {
         this.p1 = p1;
         this.p2 = p2;
     }
+
+    @Override
+    public String toString() {
+        return p1 + " to " + p2;
+    }
 }

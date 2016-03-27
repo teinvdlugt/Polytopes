@@ -5,4 +5,5 @@
     <string name="opacity">Opacity:</string>
     <string name="a11y_collapse">Collapse</string>
     <string name="a11y_expand">Expand</string>
+    <string name="perspective_angle">Perspective angle:</string>
 </resources>

@@ -184,6 +184,16 @@ public class PolytopeView extends View {
         invalidate();
     }
 
+    public double getAnglePerDimension() {
+        return anglePerDimension;
+    }
+
+    public void setAnglePerDimension(double anglePerDimension) {
+        this.anglePerDimension = anglePerDimension;
+        render();
+        invalidate();
+    }
+
     public double getRotation2D() {
         return rotation2D;
     }

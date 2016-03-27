@@ -8,10 +8,10 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
 
     private PolytopeView polytopeView;
-    private SeekBar strokeWidthSeekBar, opacitySeekBar;
+    private SeekBar strokeWidthSeekBar, opacitySeekBar, perspectiveAngleSeekBar;
     private BottomSheetBehavior bottomSheetBehavior;
     private ImageButton expandButton;
 
@@ -24,29 +24,13 @@ public class MainActivity extends AppCompatActivity {
         expandButton = (ImageButton) findViewById(R.id.expandImageButton);
         strokeWidthSeekBar = (SeekBar) findViewById(R.id.strokeWidthSeekBar);
         opacitySeekBar = (SeekBar) findViewById(R.id.opacitySeekBar);
+        perspectiveAngleSeekBar = (SeekBar) findViewById(R.id.perspectiveAngleSeekBar);
         strokeWidthSeekBar.setProgress((int) polytopeView.getStrokeWidth() * 10);
         opacitySeekBar.setProgress(polytopeView.getPlaneOpacity());
-        strokeWidthSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                polytopeView.setStrokeWidth((progress) / 10f);
-                // (stroke width shouldn't be zero)
-            }
-
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-
-            public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
-        opacitySeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                polytopeView.setPlaneOpacity(progress);
-            }
-
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-
-            public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
+        perspectiveAngleSeekBar.setProgress((int) (polytopeView.getAnglePerDimension() * 100));
+        strokeWidthSeekBar.setOnSeekBarChangeListener(this);
+        opacitySeekBar.setOnSeekBarChangeListener(this);
+        perspectiveAngleSeekBar.setOnSeekBarChangeListener(this);
 
         VerticalScroller verticalScroller = (VerticalScroller) findViewById(R.id.verticalScroller);
         if (verticalScroller != null)
@@ -77,6 +61,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        if (seekBar.equals(strokeWidthSeekBar)) {
+            polytopeView.setStrokeWidth((progress) / 10f);
+        } else if (seekBar.equals(opacitySeekBar)) {
+            polytopeView.setPlaneOpacity(progress);
+        } else if (seekBar.equals(perspectiveAngleSeekBar)) {
+            polytopeView.setAnglePerDimension(progress / 100d);
+        }
+    }
+
     public void onClick2D(View view) {
         polytopeView.setDimensions(2);
     }
@@ -103,4 +98,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {}
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {}
 }
