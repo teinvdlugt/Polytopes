@@ -109,8 +109,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:max="100" />
-            </LinearLayout>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/opacity"
+                    android:textColor="?android:textColorPrimary" />
+
+                <SeekBar
+                    android:id="@+id/opacitySeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="255" />
+            </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

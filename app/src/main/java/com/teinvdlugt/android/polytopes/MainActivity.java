@@ -3,7 +3,6 @@ package com.teinvdlugt.android.polytopes;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
-import android.support.graphics.drawable.AnimatedVectorDrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -12,7 +11,7 @@ import android.widget.SeekBar;
 public class MainActivity extends AppCompatActivity {
 
     private PolytopeView polytopeView;
-    private SeekBar strokeWidthSeekBar;
+    private SeekBar strokeWidthSeekBar, opacitySeekBar;
     private BottomSheetBehavior bottomSheetBehavior;
     private ImageButton expandButton;
 
@@ -24,12 +23,24 @@ public class MainActivity extends AppCompatActivity {
         polytopeView = (PolytopeView) findViewById(R.id.polytopeView);
         expandButton = (ImageButton) findViewById(R.id.expandImageButton);
         strokeWidthSeekBar = (SeekBar) findViewById(R.id.strokeWidthSeekBar);
+        opacitySeekBar = (SeekBar) findViewById(R.id.opacitySeekBar);
         strokeWidthSeekBar.setProgress((int) polytopeView.getStrokeWidth() * 10);
+        opacitySeekBar.setProgress(polytopeView.getPlaneOpacity());
         strokeWidthSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                polytopeView.setStrokeWidth((progress + 1) / 10f);
+                polytopeView.setStrokeWidth((progress) / 10f);
                 // (stroke width shouldn't be zero)
+            }
+
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+        opacitySeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                polytopeView.setPlaneOpacity(progress);
             }
 
             public void onStartTrackingTouch(SeekBar seekBar) {}

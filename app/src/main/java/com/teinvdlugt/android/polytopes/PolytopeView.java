@@ -3,7 +3,6 @@ package com.teinvdlugt.android.polytopes;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
@@ -63,19 +62,20 @@ public class PolytopeView extends View {
         int xOffset = getWidth() / 2 - (maxX + minX) / 2;
         int yOffset = getHeight() / 2 - (maxY + minY) / 2;
 
-        for (Line line : lines) {
-            canvas.drawLine(line.p1.x + xOffset, line.p1.y + yOffset, line.p2.x + xOffset, line.p2.y + yOffset, linePaint);
-        }
-        for (Plane plane : planes) {
-            Path path = new Path();
-            path.moveTo(plane.points.get(0).x + xOffset, plane.points.get(0).y + yOffset);
-            for (int i = 1; i < plane.points.size(); i++) {
-                Point pt = plane.points.get(i);
-                path.lineTo(pt.x + xOffset, pt.y + yOffset);
+        if (linePaint.getStrokeWidth() != 0)
+            for (Line line : lines)
+                canvas.drawLine(line.p1.x + xOffset, line.p1.y + yOffset, line.p2.x + xOffset, line.p2.y + yOffset, linePaint);
+        if (planePaint.getAlpha() != 0)
+            for (Plane plane : planes) {
+                Path path = new Path();
+                path.moveTo(plane.points.get(0).x + xOffset, plane.points.get(0).y + yOffset);
+                for (int i = 1; i < plane.points.size(); i++) {
+                    Point pt = plane.points.get(i);
+                    path.lineTo(pt.x + xOffset, pt.y + yOffset);
+                }
+                path.close();
+                canvas.drawPath(path, planePaint);
             }
-            path.close();
-            canvas.drawPath(path, planePaint);
-        }
     }
 
     private void dimensionUp(int dimension) {
@@ -175,6 +175,15 @@ public class PolytopeView extends View {
         invalidate();
     }
 
+    public int getPlaneOpacity() {
+        return planePaint.getAlpha();
+    }
+
+    public void setPlaneOpacity(int opacity) {
+        planePaint.setAlpha(opacity);
+        invalidate();
+    }
+
     public double getRotation2D() {
         return rotation2D;
     }
@@ -190,7 +199,7 @@ public class PolytopeView extends View {
         linePaint.setStrokeWidth(3);
         linePaint.setAntiAlias(true);
         planePaint = new Paint();
-        planePaint.setColor(Color.argb(0x33, 0, 0, 0));
+        planePaint.setAlpha(0x33);
         render();
     }
 
